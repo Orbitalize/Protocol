@@ -1,4 +1,4 @@
-openapi: 3.0.2
+openapi: 3.1.2
 info:
   title: UTM API (USS->DSS and USS->USS)
   version: 1.0.0
@@ -126,14 +126,16 @@ components:
       format: uuid
       pattern: >-
         ^[0-9a-fA-F]{8}\\-[0-9a-fA-F]{4}\\-4[0-9a-fA-F]{3}\\-[8-b][0-9a-fA-F]{3}\\-[0-9a-fA-F]{12}$
-      example: 03e5572a-f733-49af-bc14-8a18bd53ee39
+      examples:
+      - 03e5572a-f733-49af-bc14-8a18bd53ee39
     EntityID:
       description: >-
         Identifier for an Entity communicated through the DSS.  Formatted as a
         UUIDv4.
       anyOf:
       - $ref: '#/components/schemas/UUIDv4Format'
-      example: 2f8343be-6482-4d1b-a474-16847e01af1e
+      examples:
+      - 2f8343be-6482-4d1b-a474-16847e01af1e
     EntityOVN:
       title: EntityOVN
       description: >-
@@ -147,14 +149,16 @@ components:
       type: string
       minLength: 16
       maxLength: 128
-      example: 9d158f59-80b7-4c11-9c0c-8a2b4d936b2d
+      examples:
+      - 9d158f59-80b7-4c11-9c0c-8a2b4d936b2d
     SubscriptionID:
       description: >-
         Identifier for a subscription communicated through the DSS.  Formatted
         as a UUIDv4.
       anyOf:
       - $ref: '#/components/schemas/UUIDv4Format'
-      example: 78ea3fe8-71c2-4f5c-9b44-9c02f5563c6f
+      examples:
+      - 78ea3fe8-71c2-4f5c-9b44-9c02f5563c6f
     Key:
       description: >-
         Proof that a client has obtained the latest airspace content, used to
@@ -179,7 +183,8 @@ components:
           description: >-
             RFC3339-formatted time/date string.  The time zone must be 'Z'.
           format: date-time
-          example: '1985-04-12T23:20:50.52Z'
+          examples:
+          - '1985-04-12T23:20:50.52Z'
         format:
           type: string
           enum:
@@ -196,9 +201,9 @@ components:
             Distance from the centerpoint of a circular area, along the WGS84
             ellipsoid.
           type: number
-          minimum: 0
-          exclusiveMinimum: true
-          example: 300.183
+          exclusiveMinimum: 0
+          examples:
+          - 300.183
         units:
           type: string
           description: >-
@@ -221,9 +226,7 @@ components:
           type: number
           format: double
           minimum: -8000
-          exclusiveMinimum: false
           maximum: 100000
-          exclusiveMaximum: false
         reference:
           description: >-
             A code indicating the reference for a vertical distance. See AIXM
@@ -246,23 +249,21 @@ components:
         Degrees of latitude north of the equator, with reference to the WGS84
         ellipsoid.
       maximum: 90
-      exclusiveMaximum: false
       minimum: -90
-      exclusiveMinimum: false
       type: number
       format: double
-      example: 34.123
+      examples:
+      - 34.123
     Longitude:
       description: >-
         Degrees of longitude east of the Prime Meridian, with reference to the
         WGS84 ellipsoid.
       minimum: -180
-      exclusiveMaximum: false
       maximum: 180
-      exclusiveMinimum: false
       type: number
       format: double
-      example: -118.456
+      examples:
+      - -118.456
     Polygon:
       description: >-
         An enclosed area on the earth. The bounding edges of this polygon are
@@ -355,7 +356,8 @@ components:
           description: >-
             Human-readable message indicating what error occurred and/or why.
           type: string
-          example: The error occurred because [...]
+          examples:
+            - The error occurred because [...]
     SubscriptionState:
       description: >-
         State of subscription which is causing a notification to be sent.
@@ -463,7 +465,6 @@ components:
         detect missed notifications more easily.
       type: integer
       minimum: 0
-      exclusiveMinimum: false
       default: 0
     QuerySubscriptionParameters:
       description: >-
@@ -583,7 +584,8 @@ components:
         constructed by appending, e.g., `/uss/v1/{resource}/{id}` to this base
         URL. Accordingly, this URL may not have a trailing '/' character.
       type: string
-      example: https://uss.example.com/utm
+      examples:
+      - https://uss.example.com/utm
     OperationalIntentState:
       description: >-
         State of an operational intent.
@@ -647,7 +649,8 @@ components:
           $ref: '#/components/schemas/EntityID'
         manager:
           type: string
-          example: uss1
+          examples:
+          - uss1
           description: >-
             Created by the DSS based on creating client's ID (via access
             token).  Used internal to the DSS for restricting mutation and
@@ -873,7 +876,8 @@ components:
           $ref: '#/components/schemas/EntityID'
         manager:
           type: string
-          example: uss1
+          examples:
+          - uss1
           description: >-
             Created by the DSS based on creating client's ID (via access
             token).  Used internal to the DSS for restricting mutation and
@@ -1148,7 +1152,8 @@ components:
         type:
           description: Type of airspace feature this constraint represents.
           type: string
-          example: com.example.non_utm_aircraft_operations
+          examples:
+          - com.example.non_utm_aircraft_operations
         geozone:
           description: >-
             If this constraint is an ED-269 compliant geo zone, the details
@@ -1308,7 +1313,8 @@ components:
           format: float
           type: number
           description: Ground speed in meters/second.
-          example: 200.1
+          examples:
+          - 200.1
         units_speed:
           type: string
           enum:
@@ -1321,7 +1327,8 @@ components:
             angle. This value is provided in degrees East of North with a
             minimum resolution of 1 degree. A value of 360 indicates invalid, no
             value, or unknown.
-          example: 120
+          examples:
+          - 120
           default: 0
     UssAvailabilityStatus:
       type: object
