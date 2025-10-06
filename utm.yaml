@@ -1164,6 +1164,18 @@ components:
       description: >-
         Details of a UTM constraint. Note that this data is not stored in the
         DSS; only with the clients.
+      # geozone and geozone_ed318 are mutually  exclusive
+      if:
+        anyOf:
+          - required:
+            - geozone
+          - required: 
+            - geozone_ed318
+      then:
+        not:
+          required:
+          - geozone
+          - geozone_ed318
       required:
       - volumes
       type: object
@@ -1189,6 +1201,12 @@ components:
             about that geo zone.
           anyOf:
           - $ref: '#/components/schemas/GeoZone'
+        geozone_ed318:
+          description: >-
+            If this constraint is an ED-318 compliant geo zone, the original
+            ED-318 UAS GeoZone GeoJSON Feature
+          anyOf:
+          - $ref: 'https://raw.githubusercontent.com/UASGeoZones/ED-318/refs/heads/main/schema/Schema_GeoZones.json#/properties/features/items'
     Constraint:
       description: Full specification of a UTM constraint.
       required:
