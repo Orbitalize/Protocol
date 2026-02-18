@@ -381,11 +381,14 @@ components:
         State of subscription which is causing a notification to be sent.
       required:
       - subscription_id
+      - manager
       - notification_index
       type: object
       properties:
         subscription_id:
           $ref: '#/components/schemas/SubscriptionID'
+        manager:
+          type: string
         notification_index:
           $ref: '#/components/schemas/SubscriptionNotificationIndex'
     SubscriberToNotify:
@@ -413,6 +416,7 @@ components:
         ongoing basis (e.g., "planning area").
       required:
       - id
+      - manager
       - version
       - notification_index
       - uss_base_url
@@ -420,6 +424,13 @@ components:
       properties:
         id:
           $ref: '#/components/schemas/SubscriptionID'
+        manager:
+          type: string
+          example: uss1
+          description: >-
+            Created by the DSS based on creating client's ID (via access
+            token).  Used internal to the DSS for restricting retrieval, mutation and
+            deletion operations to manager.
         version:
           description: >-
             Version of the subscription that the DSS changes every time a USS
